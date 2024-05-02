@@ -1,5 +1,7 @@
 
 config ?= compileClasspath
+version ?= $(shell grep 'Plugin-Version' plugins/zhoup-sge1/src/resources/META-INF/MANIFEST.MF | awk '{ print $$2 }')
+
 
 ifdef module 
 mm = :${module}:
@@ -47,6 +49,11 @@ ifndef class
 else
 	./gradlew ${mm}test --tests ${class}
 endif
+
+install:
+	./gradlew copyPluginZip
+	rm -rf ${NXF_HOME}/plugins/zhoup-sge1-${version}
+	cp -r build/plugins/zhoup-sge1-${version} ${NXF_HOME}/plugins/
 
 assemble:
 	./gradlew assemble
