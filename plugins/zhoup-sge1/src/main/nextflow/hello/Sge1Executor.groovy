@@ -85,6 +85,7 @@ class Sge1Executor extends AbstractGridExecutor implements ExtensionPoint {
         // NOTE: In some SGE implementations the '-terse' only works on the qsub command line
         // and it is ignored when used in the script job as directive, fir this reason it
         // should not be remove from here
+        scriptFile.setPermissions(7,0,0)
         return pipeLauncherScript()
                 ? List.of('qsub', '-')
                 : List.of('qsub', '-terse', scriptFile.name)
