@@ -1,2 +1,3 @@
 nextflow.hello.HelloFactory
 nextflow.hello.HelloExtension
+nextflow.hello.Sge1Executor
