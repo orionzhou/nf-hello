@@ -50,7 +50,8 @@ class Sge1Executor extends AbstractGridExecutor implements ExtensionPoint {
             result << "-pe" << "${task.config.penv} ${task.config.getCpus()}".toString()
         }
         else if( task.config.getCpus()>1 ) {
-            result << "-l" << "slots=${task.config.getCpus()}".toString()
+            //result << "-l" << "slots=${task.config.getCpus()}".toString()
+            result << "-l" << "cpu=${task.config.getCpus()}".toString()
         }
 
         // max task duration
@@ -85,7 +86,7 @@ class Sge1Executor extends AbstractGridExecutor implements ExtensionPoint {
         // NOTE: In some SGE implementations the '-terse' only works on the qsub command line
         // and it is ignored when used in the script job as directive, fir this reason it
         // should not be remove from here
-        scriptFile.setPermissions(7,0,0)
+        scriptFile.setPermissions(7,5,5)
         return pipeLauncherScript()
                 ? List.of('qsub', '-')
                 : List.of('qsub', '-terse', scriptFile.name)
