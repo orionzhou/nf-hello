@@ -49,7 +49,8 @@ class Sge1Executor extends AbstractGridExecutor implements ExtensionPoint {
         if ( task.config.penv ) {
             result << "-pe" << "${task.config.penv} ${task.config.getCpus()}".toString()
         }
-        else if( task.config.getCpus()>1 ) {
+        //else if( task.config.getCpus()>1 ) {
+        else {
             //result << "-l" << "slots=${task.config.getCpus()}".toString()
             result << "-l" << "cpu=${task.config.getCpus()}".toString()
         }
@@ -124,8 +125,8 @@ class Sge1Executor extends AbstractGridExecutor implements ExtensionPoint {
     @Override
     protected List<String> queueStatusCommand(Object queue) {
         def result = ['qstat']
-        if( queue )
-            result << '-q' << queue.toString()
+        //if( queue )
+            //result << '-q' << queue.toString()
 
         return result
     }
