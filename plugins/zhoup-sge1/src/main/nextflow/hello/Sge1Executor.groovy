@@ -70,10 +70,11 @@ class Sge1Executor extends AbstractGridExecutor implements ExtensionPoint {
             result << "-l" << "mem=${mem}".toString()
         }
 
+        result << '-V' << ''
         // -- at the end append the command script wrapped file name
-        if( task.config.getClusterOptions() ) {
-            result << task.config.getClusterOptions() << ''
-        }
+        //if( task.config.getClusterOptions() ) {
+        //    result << task.config.getClusterOptions() << ''
+        //}
 
         return result
     }
